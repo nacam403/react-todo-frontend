@@ -1,0 +1,59 @@
+{
+  "name": "npm-script-study",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run watch",
+    "test": "mocha --compilers js:babel-register ./test/**/*.test.js",
+    "clean": "rimraf ./dist && mkdirp ./dist",
+    "lint:js": "eslint --fix ./src/js/**/*.js",
+    "prebuild:js": "npm run lint:js",
+    "build:js": "browserify ./src/js/index.js --debug --outfile ./src/assets/bundle.js",
+    "build:css": "node-sass --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
+    "prewatch:css": "npm run build:css",
+    "watch:js": "watchify ./src/js/index.js --verbose --debug --outfile ./src/assets/bundle.js",
+    "watch:css": "node-sass --watch --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
+    "watch:server": "browser-sync start --server './' --startPath './src/assets' reload --files='./src/assets/**/*'",
+    "watch": "run-p watch:*",
+    "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --output ./dist/bundle.js",
+    "compress:css": "cleancss ./src/assets/bundle.css --output ./dist/bundle.css",
+    "release:js": "run-s build:js compress:js",
+    "release:css": "run-s build:css compress:css",
+    "release:copy": "cpx './src/assets/**/*' ./dist",
+    "release": "npm-run-all clean release:copy -p release:js release:css"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
+    "clean-css-cli": "^4.1.10",
+    "cpx": "^1.5.0",
+    "eslint": "^4.8.0",
+    "eslint-plugin-react": "^7.4.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^4.0.0",
+    "node-sass": "^4.5.3",
+    "npm-run-all": "^4.1.1",
+    "power-assert": "^1.4.4",
+    "redux-devtools": "^3.4.0",
+    "rimraf": "^2.6.2",
+    "uglify-js": "^3.1.3",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
+  }
+}
