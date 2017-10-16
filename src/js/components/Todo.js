@@ -5,7 +5,7 @@ const Todo = ({ description, done }) => (
   <li style={{
     color: done ? '#bbbbbb' : 'black'
   }}>
-    <input type="checkbox" />
+    <input type="checkbox" defaultChecked={done} />
     <span>{description}</span>
     <button>edit</button>
     <button>delete</button>
