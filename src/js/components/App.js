@@ -17,7 +17,8 @@ const dummyTodoList = [
   {
     id: 3,
     description: 'description-3',
-    done: false
+    done: false,
+    editing: true
   }
 ];
 
