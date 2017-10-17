@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import Todo from './Todo';
 import EditingTodo from './EditingTodo';
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete }) => (
   <ul>
     {todos.map(todo => todo.editing ? (
-      <EditingTodo key={todo.id} {...todo} />
+      <EditingTodo key={todo.id} {...todo}
+        onClickSave={description => onClickSave(todo.id, description)} />
     ) : (
-      <Todo key={todo.id} {...todo} />
+      <Todo key={todo.id} {...todo}
+        onClickDone={() => onClickDone(todo.id)}
+        onClickEdit={() => onClickEdit(todo.id)}
+        onClickDelete={() => onClickDelete(todo.id)} />
     ))}
   </ul>
 );
@@ -22,7 +26,11 @@ TodoList.propTypes = {
       done: PropTypes.bool.isRequired,
       editing: PropTypes.bool
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  onClickDone: PropTypes.func.isRequired,
+  onClickEdit: PropTypes.func.isRequired,
+  onClickSave: PropTypes.func.isRequired,
+  onClickDelete: PropTypes.func.isRequired
 };
 
 export default TodoList;
