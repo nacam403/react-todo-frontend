@@ -17,18 +17,6 @@ const reducer = (state = initialState, action) => {
       ]
     });
 
-  case 'TOGGLE_TODO_DONE':
-    return Object.assign({}, state, {
-      todos: state.todos.map(todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
-        return Object.assign({}, todo, {
-          done: !todo.done
-        });
-      })
-    });
-
   case 'START_EDIT_TODO':
     return Object.assign({}, state, {
       todos: state.todos.map(todo => {
@@ -39,17 +27,9 @@ const reducer = (state = initialState, action) => {
       })
     });
 
-  case 'FINISH_EDIT_TODO':
+  case 'UPDATE_TODO':
     return Object.assign({}, state, {
-      todos: state.todos.map(todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
-        return Object.assign({}, todo, {
-          editing: false,
-          description: action.description
-        });
-      })
+      todos: state.todos.map(todo => (todo.id !== action.todo.id) ? todo : action.todo)
     });
 
   case 'DELETE_TODO':

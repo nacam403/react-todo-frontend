@@ -51,22 +51,6 @@ const actions = {
     };
   },
 
-  toggleTodoDone: id => {
-    return dispatch => {
-      const fakePromise = new Promise(resolve => {
-        resolve({});
-      });
-
-      fakePromise.then(() => {
-        dispatch({
-          type: 'TOGGLE_TODO_DONE',
-          id
-        });
-      });
-      return fakePromise;
-    };
-  },
-
   startEditTodo: id => {
     return {
       type: 'START_EDIT_TODO',
@@ -74,7 +58,7 @@ const actions = {
     };
   },
 
-  finishEditTodo: (id, description) => {
+  updateTodo: todo => {
     return dispatch => {
       const fakePromise = new Promise(resolve => {
         resolve({});
@@ -82,9 +66,8 @@ const actions = {
 
       fakePromise.then(() => {
         dispatch({
-          type: 'FINISH_EDIT_TODO',
-          id,
-          description
+          type: 'UPDATE_TODO',
+          todo
         });
       });
       return fakePromise;

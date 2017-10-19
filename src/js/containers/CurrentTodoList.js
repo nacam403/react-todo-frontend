@@ -11,9 +11,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClickDone: id => dispatch(Actions.toggleTodoDone(id)),
+    onClickDone: todo => dispatch(Actions.updateTodo(todo)),
     onClickEdit: id => dispatch(Actions.startEditTodo(id)),
-    onClickSave: (id, description) => dispatch(Actions.finishEditTodo(id, description)),
+    onClickSave: todo => dispatch(Actions.updateTodo(todo)),
     onClickDelete: id => dispatch(Actions.deleteTodo(id))
   };
 };
