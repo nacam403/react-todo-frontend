@@ -19,12 +19,7 @@ const reducer = (state = initialState, action) => {
 
   case 'START_EDIT_TODO':
     return Object.assign({}, state, {
-      todos: state.todos.map(todo => {
-        if (todo.id !== action.id) {
-          return todo;
-        }
-        return Object.assign({}, todo, { editing: true });
-      })
+      todos: state.todos.map(todo => (todo.id !== action.id) ? todo : Object.assign({}, todo, { editing: true }))
     });
 
   case 'UPDATE_TODO':
