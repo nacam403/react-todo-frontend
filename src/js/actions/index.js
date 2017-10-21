@@ -1,52 +1,34 @@
-export function fetchTodos() {
-  return dispatch => {
-    const fakePromise = new Promise(resolve => {
-      resolve([
-        {
-          id: 1,
-          description: 'description-1',
-          done: false
-        },
-        {
-          id: 2,
-          description: 'description-2',
-          done: true
-        },
-        {
-          id: 3,
-          description: 'description-3',
-          done: false
-        }
-      ]);
-    });
+const restBaseUrl = '/todos'; // for dev mode
 
-    fakePromise.then(todos => {
-      dispatch({
-        type: 'FETCH_TODOS',
-        todos
-      });
+export function fetchTodos() {
+  return async dispatch => {
+    const response = await fetch(restBaseUrl);
+    const json = await response.json();
+    dispatch({
+      type: 'FETCH_TODOS',
+      todos: json
     });
-    return fakePromise;
   };
 }
 
 export function addTodo(description) {
-  return dispatch => {
-    const fakePromise = new Promise(resolve => {
-      resolve({ id: new Date().getTime() });
+  return async dispatch => {
+    const response = await fetch(restBaseUrl, {
+      method: 'POST',
+      body: JSON.stringify({ description }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-
-    fakePromise.then(({ id }) => {
-      dispatch({
-        type: 'ADD_TODO',
-        todo: {
-          id,
-          description,
-          done: false
-        }
-      });
+    const json = await response.json();
+    dispatch({
+      type: 'ADD_TODO',
+      todo: {
+        id: json.id,
+        description,
+        done: false
+      }
     });
-    return fakePromise;
   };
 }
 
@@ -58,33 +40,29 @@ export function startEditTodo(id) {
 }
 
 export function updateTodo(todo) {
-  return dispatch => {
-    const fakePromise = new Promise(resolve => {
-      resolve({});
+  return async dispatch => {
+    await fetch(`${restBaseUrl}/${todo.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(todo),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-
-    fakePromise.then(() => {
-      dispatch({
-        type: 'UPDATE_TODO',
-        todo
-      });
+    dispatch({
+      type: 'UPDATE_TODO',
+      todo
     });
-    return fakePromise;
   };
 }
 
 export function deleteTodo(id) {
-  return dispatch => {
-    const fakePromise = new Promise(resolve => {
-      resolve({});
+  return async dispatch => {
+    await fetch(`${restBaseUrl}/${id}`, {
+      method: 'DELETE'
     });
-
-    fakePromise.then(() => {
-      dispatch({
-        type: 'DELETE_TODO',
-        id
-      });
+    dispatch({
+      type: 'DELETE_TODO',
+      id
     });
-    return fakePromise;
   };
 }
