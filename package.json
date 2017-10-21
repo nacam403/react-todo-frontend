@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm run watch",
-    "test": "mocha --compilers js:babel-register ./test/**/*.test.js",
+    "test": "mocha --require babel-register ./test/**/*.test.js",
     "clean": "rimraf ./dist && mkdirp ./dist",
     "lint:js": "eslint --fix ./src/js/**/*.js",
     "prebuild:js": "npm run lint:js",
