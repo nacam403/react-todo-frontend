@@ -14,7 +14,7 @@
     "prewatch:css": "npm run build:css",
     "watch:js": "watchify ./src/js/index.js --verbose --debug --outfile ./src/assets/bundle.js",
     "watch:css": "node-sass --watch --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
-    "watch:server": "browser-sync start --server src/assets --files src/assets",
+    "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
     "watch": "run-p watch:*",
     "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --output ./dist/bundle.js",
     "compress:css": "cleancss ./src/assets/bundle.css --output ./dist/bundle.css",

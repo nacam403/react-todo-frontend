@@ -1,4 +1,9 @@
-const restBaseUrl = 'http://localhost:9000/todos';
+const restBaseUrl = (() => {
+  if (process.env.NODE_ENV === 'production') {
+    return '/rest/todos';
+  }
+  return '/todos';
+})();
 
 export function fetchTodos() {
   return async dispatch => {
@@ -14,7 +19,6 @@ export function fetchTodos() {
 export function addTodo(description) {
   return async dispatch => {
     const response = await fetch(restBaseUrl, {
-      mode: 'cors',
       method: 'POST',
       body: JSON.stringify({ description }),
       headers: {
@@ -43,7 +47,6 @@ export function startEditTodo(id) {
 export function updateTodo(todo) {
   return async dispatch => {
     await fetch(`${restBaseUrl}/${todo.id}`, {
-      mode: 'cors',
       method: 'PUT',
       body: JSON.stringify(todo),
       headers: {
@@ -60,7 +63,6 @@ export function updateTodo(todo) {
 export function deleteTodo(id) {
   return async dispatch => {
     await fetch(`${restBaseUrl}/${id}`, {
-      mode: 'cors',
       method: 'DELETE'
     });
     dispatch({
