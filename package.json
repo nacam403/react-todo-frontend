@@ -9,6 +9,7 @@
     "lint:js": "eslint --fix ./src/js/**/*.js",
     "prebuild:js": "npm run lint:js",
     "build:js": "browserify ./src/js/index.js --debug --outfile ./src/assets/bundle.js",
+    "build-production:js": "NODE_ENV=production browserify ./src/js/index.js --outfile ./src/assets/bundle.js",
     "build:css": "node-sass --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
     "prewatch:css": "npm run build:css",
     "watch:js": "watchify ./src/js/index.js --verbose --debug --outfile ./src/assets/bundle.js",
@@ -17,7 +18,7 @@
     "watch": "run-p watch:*",
     "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --output ./dist/bundle.js",
     "compress:css": "cleancss ./src/assets/bundle.css --output ./dist/bundle.css",
-    "release:js": "run-s build:js compress:js",
+    "release:js": "run-s build-production:js compress:js",
     "release:css": "run-s build:css compress:css",
     "release:copy": "cpx './src/assets/**/*' ./dist",
     "release": "npm-run-all clean release:copy -p release:js release:css"
@@ -28,6 +29,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-power-assert": "^1.0.0",
     "babel-preset-react": "^6.24.1",
