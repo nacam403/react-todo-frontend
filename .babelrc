@@ -3,9 +3,6 @@
     "env",
     "react"
   ],
-  "plugins": [
-    "transform-inline-environment-variables"
-  ],
   "env": {
     "development": {
       "presets": [

@@ -8,11 +8,11 @@
     "clean": "rimraf ./dist && mkdirp ./dist",
     "lint:js": "eslint --fix ./src/js/**/*.js",
     "prebuild:js": "npm run lint:js",
-    "build:js": "browserify ./src/js/index.js --debug --outfile ./src/assets/bundle.js",
-    "build-production:js": "NODE_ENV=production browserify ./src/js/index.js --outfile ./src/assets/bundle.js",
+    "build:js": "webpack",
+    "build-production:js": "webpack --define process.env.NODE_ENV=\"'production'\"",
     "build:css": "node-sass --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
     "prewatch:css": "npm run build:css",
-    "watch:js": "watchify ./src/js/index.js --verbose --debug --outfile ./src/assets/bundle.js",
+    "watch:js": "webpack --watch",
     "watch:css": "node-sass --watch --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
     "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
     "watch": "run-p watch:*",
@@ -29,14 +29,13 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-power-assert": "^1.0.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
-    "babelify": "^7.3.0",
     "browser-sync": "^2.18.13",
-    "browserify": "^14.4.0",
     "clean-css-cli": "^4.1.10",
     "cpx": "^1.5.0",
     "eslint": "^4.8.0",
@@ -51,7 +50,7 @@
     "redux-mock-store": "^1.3.0",
     "rimraf": "^2.6.2",
     "uglify-js": "^3.1.3",
-    "watchify": "^3.9.0"
+    "webpack": "^3.8.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
