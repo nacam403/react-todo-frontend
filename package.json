@@ -16,7 +16,7 @@
     "watch:css": "node-sass --watch --source-map-embed ./src/scss/index.scss ./src/assets/bundle.css",
     "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
     "watch": "run-p watch:*",
-    "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --output ./dist/bundle.js",
+    "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --comments --output ./dist/bundle.js",
     "compress:css": "cleancss ./src/assets/bundle.css --output ./dist/bundle.css",
     "release:js": "run-s build-production:js compress:js",
     "release:css": "run-s build:css compress:css",
