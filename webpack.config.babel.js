@@ -1,10 +1,17 @@
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 
 export default {
   entry: './src/js/index.js',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/html_template/index.html'
+    })
+  ],
   output: {
     path: path.resolve(__dirname, 'src/assets'),
-    filename: 'bundle.js'
+    filename: 'bundle.[chunkhash].js'
   },
   module: {
     rules: [
