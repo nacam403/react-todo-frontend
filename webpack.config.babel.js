@@ -10,14 +10,25 @@ export default {
     rules: [
       {
         test: /\.js$/,
-        include: [
-          path.resolve(__dirname, 'src')
-        ],
-        use: {
-          loader: 'babel-loader'
-        }
+        include: path.resolve(__dirname, 'src/js'),
+        use: [ 'babel-loader' ]
+      },
+      {
+        test: /\.scss$/,
+        include: path.resolve(__dirname, 'src/scss'),
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          },
+          {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
+        ]
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: 'inline-source-map'
 };

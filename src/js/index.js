@@ -9,6 +9,8 @@ import Reducer from './reducers';
 import * as Actions from './actions';
 import App from './components/App';
 
+import '../scss/index.scss';
+
 const store = createStore(Reducer, applyMiddleware(thunkMiddleware));
 store.dispatch(Actions.fetchTodos());
 
