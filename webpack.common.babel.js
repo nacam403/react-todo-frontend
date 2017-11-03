@@ -1,7 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-
 export default {
   entry: './src/js/index.js',
   plugins: [
@@ -9,10 +8,6 @@ export default {
       template: 'src/html_template/index.html'
     })
   ],
-  output: {
-    path: path.resolve(__dirname, 'src/assets'),
-    filename: 'bundle.[chunkhash].js'
-  },
   module: {
     rules: [
       {

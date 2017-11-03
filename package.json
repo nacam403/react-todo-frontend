@@ -5,18 +5,18 @@
   "scripts": {
     "start": "npm run watch",
     "test": "mocha --require babel-register ./test/**/*.test.js",
-    "clean": "rimraf ./dist && mkdirp ./dist",
+    "clean:src-assets": "rimraf ./src/assets/*.js ./src/assets/*.html && mkdirp ./src/assets",
+    "clean:dist": "rimraf ./dist && mkdirp ./dist",
+    "clean": "run-p clean:*",
     "lint:js": "eslint --fix ./src/js/**/*.js",
-    "prebuild:js": "npm run lint:js",
-    "build:js": "webpack",
-    "build-production:js": "webpack --define process.env.NODE_ENV=\"'production'\"",
-    "watch:js": "webpack --watch",
+    "prebuild:js": "run-p clean:src-assets lint:js",
+    "build:js": "webpack --config webpack.develop.babel.js",
+    "build-production:js": "webpack --define process.env.NODE_ENV=\"'production'\" --config webpack.production.babel.js",
+    "watch:js": "webpack --config webpack.develop.babel.js --watch",
     "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
     "watch": "run-p watch:*",
-    "compress:js": "uglifyjs ./src/assets/bundle.js --compress --mangle --comments --output ./dist/bundle.js",
-    "release:js": "run-s build-production:js compress:js",
     "release:copy": "cpx './src/assets/**/*' ./dist",
-    "release": "npm-run-all clean release:copy -p release:js"
+    "release": "npm-run-all clean release:copy -p build-production:js"
   },
   "browserify": {
     "transform": [
@@ -32,8 +32,8 @@
     "babel-register": "^6.26.0",
     "browser-sync": "^2.18.13",
     "cpx": "^1.5.0",
-    "eslint": "^4.8.0",
     "css-loader": "^0.28.7",
+    "eslint": "^4.8.0",
     "eslint-plugin-react": "^7.4.0",
     "fetch-mock": "^5.13.1",
     "html-webpack-plugin": "^2.30.1",
@@ -45,10 +45,12 @@
     "redux-devtools": "^3.4.0",
     "redux-mock-store": "^1.3.0",
     "rimraf": "^2.6.2",
-    "uglify-js": "^3.1.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "webpack": "^3.8.1"
+    "uglify-save-license": "^0.4.1",
+    "uglifyjs-webpack-plugin": "^1.0.1",
+    "webpack": "^3.8.1",
+    "webpack-merge": "^4.1.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
