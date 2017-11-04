@@ -16,12 +16,7 @@
     "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
     "watch": "run-p watch:*",
     "release:copy": "cpx './src/assets/**/*' ./dist",
-    "release": "npm-run-all clean release:copy -p build-production:js"
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
+    "release": "npm-run-all clean release:copy build-production:js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
