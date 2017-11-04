@@ -1,5 +1,7 @@
 node_modules/
 dist/
+src/assets/**/*.html
 
 bundle.js
 bundle.css
+*.js.map
