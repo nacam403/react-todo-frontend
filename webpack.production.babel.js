@@ -2,6 +2,7 @@ import path from 'path';
 import merge from 'webpack-merge';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import saveLicense from 'uglify-save-license';
+import CompressionPlugin from 'compression-webpack-plugin';
 
 import common from './webpack.common.babel.js';
 
@@ -17,6 +18,9 @@ export default merge(common, {
           comments: saveLicense
         }
       }
+    }),
+    new CompressionPlugin({
+      test: /\.js$/
     })
   ]
 });
