@@ -14,7 +14,7 @@
     "build-production:js": "webpack --define process.env.NODE_ENV=\"'production'\" --config webpack.production.babel.js",
     "watch:js": "webpack --config webpack.develop.babel.js --watch",
     "watch:server": "browser-sync start --serveStatic src/assets --files src/assets --proxy localhost:9000",
-    "watch": "run-p watch:*",
+    "watch": "npm-run-all build:js -p watch:*",
     "release:copy": "cpx './src/assets/**/*' ./dist",
     "release": "npm-run-all clean release:copy build-production:js"
   },
