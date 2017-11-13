@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
 
 const Todo = ({ description, done, onClickDone, onClickEdit, onClickDelete }) => (
   <li style={{
@@ -7,8 +9,8 @@ const Todo = ({ description, done, onClickDone, onClickEdit, onClickDelete }) =>
   }}>
     <input type="checkbox" defaultChecked={done} onClick={onClickDone} />
     <span>{description}</span>
-    <button onClick={onClickEdit}>edit</button>
-    <button onClick={onClickDelete}>delete</button>
+    <button onClick={onClickEdit}><FormattedMessage id="edit" /></button>
+    <button onClick={onClickDelete}><FormattedMessage id="delete" /></button>
   </li>
 );
 

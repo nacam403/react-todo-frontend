@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
 
 const EditingTodo = ({ description, done, onClickSave }) => {
   let textInput;
@@ -8,8 +10,8 @@ const EditingTodo = ({ description, done, onClickSave }) => {
     <li>
       <input type="checkbox" defaultChecked={done} disabled />
       <input type="text" defaultValue={description} ref={node => textInput = node} />
-      <button onClick={() => onClickSave(textInput.value)}>save</button>
-      <button disabled>delete</button>
+      <button onClick={() => onClickSave(textInput.value)}><FormattedMessage id="save" /></button>
+      <button disabled><FormattedMessage id="delete" /></button>
     </li>
   );
 };

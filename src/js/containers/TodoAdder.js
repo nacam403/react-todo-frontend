@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
 import * as Actions from '../actions';
 
@@ -12,7 +13,9 @@ const TodoAdderImpl = ({ onAddClick }) => {
       <input type="text" ref={node => textInput = node}></input>
       <button type="button" onClick={() => {
         onAddClick(textInput.value);
-      }}>add</button>
+      }}>
+        <FormattedMessage id="add" />
+      </button>
     </form>
   );
 };
