@@ -15,6 +15,7 @@ parserOptions:
   ecmaFeatures:
     impliedStrict: true
     jsx: true
+    experimentalObjectRestSpread: true
 
 rules:
   # Possible Errors
