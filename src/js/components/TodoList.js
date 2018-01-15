@@ -8,10 +8,10 @@ const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete 
   <ul>
     {todos.map(todo => todo.editing ? (
       <EditingTodo key={todo.id} {...todo}
-        onClickSave={description => onClickSave(Object.assign({}, todo, { description, editing: false }))} />
+        onClickSave={description => onClickSave(description, editing: false, ...todo })} />
     ) : (
       <Todo key={todo.id} {...todo}
-        onClickDone={() => onClickDone(Object.assign({}, todo, { done: !todo.done }))}
+        onClickDone={() => onClickDone({ done: !todo.done, ...todo })}
         onClickEdit={() => onClickEdit(todo.id)}
         onClickDelete={() => onClickDelete(todo.id)} />
     ))}
