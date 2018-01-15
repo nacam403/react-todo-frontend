@@ -2,13 +2,11 @@ env:
   browser: true
   es6: true
   mocha: true
-plugins: [
-  react
-]
-extends: [
-  'eslint:recommended',
-  'plugin:react/recommended'
-]
+plugins:
+  - 'react'
+extends:
+  - 'eslint:recommended'
+  - 'plugin:react/recommended'
 parserOptions:
   ecmaVersion: 2017
   sourceType: module
