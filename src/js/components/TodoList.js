@@ -1,12 +1,21 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ElementProps } from 'react';
 
 import Todo from './Todo';
 import EditingTodo from './EditingTodo';
 
-const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete }) => (
+type Props = {
+  todos: Array<ElementProps<typeof Todo>>,
+  onClickDone: (todo: ElementProps<typeof Todo>) => void,
+  onClickSave: (todo: ElementProps<typeof Todo>) => void,
+  onClickEdit: (todoId: number) => void,
+  onClickDelete: (todoId: number) => void,
+};
+
+const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete }: Props) => (
   <ul>
-    {todos.map(todo => todo.editing ? (
+    {todos.map((todo) => todo.editing ? (
       <EditingTodo key={todo.id} {...todo}
         onClickSave={description => onClickSave({...todo, description, editing: false })} />
     ) : (
@@ -17,20 +26,5 @@ const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete 
     ))}
   </ul>
 );
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-      done: PropTypes.bool.isRequired,
-      editing: PropTypes.bool
-    }).isRequired
-  ).isRequired,
-  onClickDone: PropTypes.func.isRequired,
-  onClickEdit: PropTypes.func.isRequired,
-  onClickSave: PropTypes.func.isRequired,
-  onClickDelete: PropTypes.func.isRequired
-};
 
 export default TodoList;
