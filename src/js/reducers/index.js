@@ -1,8 +1,15 @@
-const initialState = {
+// @flow
+import type { Todo, Action } from '../types';
+
+type State = {
+  todos: Array<Todo>
+};
+
+const initialState: State = {
   todos: []
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
   case 'FETCH_TODOS':
     return {
@@ -19,23 +26,29 @@ const reducer = (state = initialState, action) => {
       ]
     };
 
-  case 'START_EDIT_TODO':
+  case 'START_EDIT_TODO': {
+    const editId = action.id;
     return {
       ...state,
-      todos: state.todos.map(todo => (todo.id !== action.id) ? todo : { ...todo, editing: true })
+      todos: state.todos.map(todo => (todo.id !== editId) ? todo : { ...todo, editing: true })
     };
+  }
 
-  case 'UPDATE_TODO':
+  case 'UPDATE_TODO': {
+    const updateTodo = action.todo;
     return {
       ...state,
-      todos: state.todos.map(todo => (todo.id !== action.todo.id) ? todo : action.todo)
+      todos: state.todos.map(todo => (todo.id !== updateTodo.id) ? todo : updateTodo)
     };
+  }
 
-  case 'DELETE_TODO':
+  case 'DELETE_TODO': {
+    const deleteId = action.id;
     return {
       ...state,
-      todos: state.todos.filter(todo => todo.id !== action.id)
+      todos: state.todos.filter(todo => todo.id !== deleteId)
     };
+  }
 
   default:
     return state;
