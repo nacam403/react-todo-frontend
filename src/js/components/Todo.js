@@ -2,10 +2,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  id: number,
-  description: string,
-  done: boolean,
+import type { Todo as TodoType } from '../types';
+
+type Props = TodoType & {
   onClickDone: () => void,
   onClickEdit: () => void,
   onClickDelete: () => void,

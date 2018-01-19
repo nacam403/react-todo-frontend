@@ -1,3 +1,6 @@
+// @flow
+import type { Todo, Action, ThunkAction } from '../types';
+
 const restBaseUrl = (() => {
   if (process.env.NODE_ENV === 'production') {
     return '/rest/todos';
@@ -5,7 +8,7 @@ const restBaseUrl = (() => {
   return '/todos';
 })();
 
-export function fetchTodos() {
+export function fetchTodos(): ThunkAction {
   return async dispatch => {
     const response = await fetch(restBaseUrl);
     const json = await response.json();
@@ -16,7 +19,7 @@ export function fetchTodos() {
   };
 }
 
-export function addTodo(description) {
+export function addTodo(description: string): ThunkAction {
   return async dispatch => {
     const response = await fetch(restBaseUrl, {
       method: 'POST',
@@ -37,14 +40,14 @@ export function addTodo(description) {
   };
 }
 
-export function startEditTodo(id) {
+export function startEditTodo(id: number): Action {
   return {
     type: 'START_EDIT_TODO',
     id
   };
 }
 
-export function updateTodo(todo) {
+export function updateTodo(todo: Todo): ThunkAction {
   return async dispatch => {
     await fetch(`${restBaseUrl}/${todo.id}`, {
       method: 'PUT',
@@ -60,7 +63,7 @@ export function updateTodo(todo) {
   };
 }
 
-export function deleteTodo(id) {
+export function deleteTodo(id: number): ThunkAction {
   return async dispatch => {
     await fetch(`${restBaseUrl}/${id}`, {
       method: 'DELETE'
