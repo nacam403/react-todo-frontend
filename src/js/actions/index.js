@@ -14,7 +14,7 @@ export function fetchTodos(): ThunkAction {
     const json = await response.json();
     dispatch({
       type: 'FETCH_TODOS',
-      todos: json
+      todos: json,
     });
   };
 }
@@ -25,8 +25,8 @@ export function addTodo(description: string): ThunkAction {
       method: 'POST',
       body: JSON.stringify({ description }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     const json = await response.json();
     dispatch({
@@ -34,8 +34,8 @@ export function addTodo(description: string): ThunkAction {
       todo: {
         id: json.id,
         description,
-        done: false
-      }
+        done: false,
+      },
     });
   };
 }
@@ -43,7 +43,7 @@ export function addTodo(description: string): ThunkAction {
 export function startEditTodo(id: number): Action {
   return {
     type: 'START_EDIT_TODO',
-    id
+    id,
   };
 }
 
@@ -53,12 +53,12 @@ export function updateTodo(todo: Todo): ThunkAction {
       method: 'PUT',
       body: JSON.stringify(todo),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     });
     dispatch({
       type: 'UPDATE_TODO',
-      todo
+      todo,
     });
   };
 }
@@ -66,11 +66,11 @@ export function updateTodo(todo: Todo): ThunkAction {
 export function deleteTodo(id: number): ThunkAction {
   return async dispatch => {
     await fetch(`${restBaseUrl}/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     });
     dispatch({
       type: 'DELETE_TODO',
-      id
+      id,
     });
   };
 }

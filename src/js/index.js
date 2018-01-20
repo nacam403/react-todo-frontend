@@ -21,15 +21,17 @@ addLocaleData([...jaLocale, ...enLocale]);
 
 const reducer = combineReducers({
   main: Reducer,
-  intl: intlReducer
+  intl: intlReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
-store.dispatch(updateIntl({
-  // とりあえずハードコートで日本語。切り替えるUIは無し。
-  locale: 'ja',
-  messages: jaMessages
-}));
+store.dispatch(
+  updateIntl({
+    // とりあえずハードコートで日本語。切り替えるUIは無し。
+    locale: 'ja',
+    messages: jaMessages,
+  })
+);
 store.dispatch(Actions.fetchTodos());
 
 ReactDOM.render(

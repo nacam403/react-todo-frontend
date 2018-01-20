@@ -3,7 +3,7 @@ export type Todo = {
   id: number,
   description: string,
   done: boolean,
-  editing?: boolean
+  editing?: boolean,
 };
 
 type FetchTodosAction = { type: 'FETCH_TODOS', todos: Array<Todo> };
@@ -13,7 +13,7 @@ type UpdateTodoAction = { type: 'UPDATE_TODO', todo: Todo };
 type DeleteTodoAction = { type: 'DELETE_TODO', id: number };
 
 export type Action =
-    FetchTodosAction
+  | FetchTodosAction
   | AddTodoAction
   | StartEditTodoAction
   | UpdateTodoAction

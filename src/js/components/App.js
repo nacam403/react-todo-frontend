@@ -7,7 +7,9 @@ import TodoAdder from '../containers/TodoAdder';
 
 const App = () => (
   <div>
-    <h1><FormattedMessage id="title" /></h1>
+    <h1>
+      <FormattedMessage id="title" />
+    </h1>
     <TodoAdder />
     <CurrentTodoList />
   </div>

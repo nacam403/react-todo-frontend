@@ -9,6 +9,7 @@ extends:
   - 'eslint:recommended'
   - 'plugin:react/recommended'
   - 'plugin:flowtype/recommended'
+  - 'plugin:prettier/recommended'
 parser: 'babel-eslint'
 parserOptions:
   ecmaVersion: 2017
@@ -42,8 +43,6 @@ rules:
     - error
   no-implied-eval: # setInterval()などの第一引数に文字列リテラルでコードを渡したら・・・
     - error
-  no-multi-spaces: # スペースを連続して使ったら・・・
-    - error
   radix: # parseInt()を使う時に第2引数（基数）を省略したら・・・
     - error
   
@@ -54,51 +53,14 @@ rules:
     - warn # デフォルトはerrorだけどwarnに緩める。変数を使う箇所を一時的にコメントアウトしたりした時にエラーになると面倒だから。
 
   # Stylistic Issues
-  brace-style: # "else"をifブロックの閉じ括弧と同じ行に書いていなかったら・・・
-    - error
   camelcase: # 変数名がキャメルケースでなかったら・・・
-    - error
-  comma-spacing: # カンマの後ろにスペースがなかったら・・・
-    - error
-  comma-style: # カンマの位置が行末でなかったら・・・
-    - error
-  eol-last: # ファイル末尾に改行がなかったら・・・
-    - error
-  func-call-spacing: # 関数名の直後にスペースがあったら・・・
-    - error
-  indent: # インデント1段のスペースの数が・・・
-    - error
-    - 2 # 2でないとエラー
-  key-spacing: # キー名に続くコロンについて、前にスペースがあったり、後ろにスペースがなかったりしたら・・・
-    - error
-  keyword-spacing: # ifなどのキーワードの前後にスペースがなかったら・・・
-    - error
-  new-cap: # コンストラクタ名の先頭が大文字でなかったら・・・
-    - error
-  new-parens: # 括弧()なしにコンストラクタを呼んだら・・・
     - error
   no-lonely-if: # else ifと書けばいいのに、elseブロックの直下に唯一のifがあったら・・・
     - error
   no-nested-ternary: # 3項演算子をネストにしたら・・・
     - error
-  no-tabs: # タブを使ったら・・・
-    - error
-  no-trailing-spaces: # 行末にスペースがあったら・・・
-    - error
-  quotes: # クォーテーションが・・・
-    - error
-    - single # シングルでないとエラー
-    - avoidEscape: true # ただし文字列にシングルクォーテーションを含む場合は、文字列をダブルクォーテーションで囲んでよい。
-  semi: # 文末のセミコロンを省略したら・・・
-    - error
-  space-before-blocks: # ブロックの直前にスペースがなかったら・・・
-    - error
-  space-infix-ops: # 演算子の前後にスペースがなかったら・・・
-    - error
 
   # ECMAScript 6
-  arrow-spacing: # アロー関数のアローの前後にスペースがなかったら・・・
-    - error
   no-var: # constやletを使わずにvarを使ったら・・・
     - error
   object-shorthand: # {x, y}と書けるのに、{x: x, y: y}のように書いていたら・・・

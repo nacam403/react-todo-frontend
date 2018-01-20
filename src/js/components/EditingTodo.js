@@ -14,9 +14,17 @@ const EditingTodo = ({ description, done, onClickSave }: Props) => {
   return (
     <li>
       <input type="checkbox" defaultChecked={done} disabled />
-      <input type="text" defaultValue={description} ref={node => textInput = node} />
-      <button onClick={() => onClickSave(textInput ? textInput.value : '')}><FormattedMessage id="save" /></button>
-      <button disabled><FormattedMessage id="delete" /></button>
+      <input
+        type="text"
+        defaultValue={description}
+        ref={node => (textInput = node)}
+      />
+      <button onClick={() => onClickSave(textInput ? textInput.value : '')}>
+        <FormattedMessage id="save" />
+      </button>
+      <button disabled>
+        <FormattedMessage id="delete" />
+      </button>
     </li>
   );
 };

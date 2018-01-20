@@ -10,14 +10,26 @@ type Props = TodoType & {
   onClickDelete: () => void,
 };
 
-const Todo = ({ description, done, onClickDone, onClickEdit, onClickDelete }: Props) => (
-  <li style={{
-    color: done ? '#bbbbbb' : 'black'
-  }}>
+const Todo = ({
+  description,
+  done,
+  onClickDone,
+  onClickEdit,
+  onClickDelete,
+}: Props) => (
+  <li
+    style={{
+      color: done ? '#bbbbbb' : 'black',
+    }}
+  >
     <input type="checkbox" defaultChecked={done} onClick={onClickDone} />
     <span>{description}</span>
-    <button onClick={onClickEdit}><FormattedMessage id="edit" /></button>
-    <button onClick={onClickDelete}><FormattedMessage id="delete" /></button>
+    <button onClick={onClickEdit}>
+      <FormattedMessage id="edit" />
+    </button>
+    <button onClick={onClickDelete}>
+      <FormattedMessage id="delete" />
+    </button>
   </li>
 );
 

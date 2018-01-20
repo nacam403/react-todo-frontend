@@ -13,17 +13,34 @@ type Props = {
   onClickDelete: (todoId: number) => void,
 };
 
-const TodoList = ({ todos, onClickDone, onClickEdit, onClickSave, onClickDelete }: Props) => (
+const TodoList = ({
+  todos,
+  onClickDone,
+  onClickEdit,
+  onClickSave,
+  onClickDelete,
+}: Props) => (
   <ul>
-    {todos.map((todo) => todo.editing ? (
-      <EditingTodo key={todo.id} {...todo}
-        onClickSave={description => onClickSave({...todo, description, editing: false })} />
-    ) : (
-      <Todo key={todo.id} {...todo}
-        onClickDone={() => onClickDone({ ...todo, done: !todo.done })}
-        onClickEdit={() => onClickEdit(todo.id)}
-        onClickDelete={() => onClickDelete(todo.id)} />
-    ))}
+    {todos.map(
+      todo =>
+        todo.editing ? (
+          <EditingTodo
+            key={todo.id}
+            {...todo}
+            onClickSave={description =>
+              onClickSave({ ...todo, description, editing: false })
+            }
+          />
+        ) : (
+          <Todo
+            key={todo.id}
+            {...todo}
+            onClickDone={() => onClickDone({ ...todo, done: !todo.done })}
+            onClickEdit={() => onClickEdit(todo.id)}
+            onClickDelete={() => onClickDelete(todo.id)}
+          />
+        )
+    )}
   </ul>
 );
 

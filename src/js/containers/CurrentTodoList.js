@@ -7,7 +7,7 @@ import type { Todo } from '../types';
 
 const mapStateToProps = state => {
   return {
-    todos: state.main.todos
+    todos: state.main.todos,
   };
 };
 
@@ -16,13 +16,10 @@ const mapDispatchToProps = dispatch => {
     onClickDone: (todo: Todo) => dispatch(Actions.updateTodo(todo)),
     onClickEdit: (id: number) => dispatch(Actions.startEditTodo(id)),
     onClickSave: (todo: Todo) => dispatch(Actions.updateTodo(todo)),
-    onClickDelete: (id: number) => dispatch(Actions.deleteTodo(id))
+    onClickDelete: (id: number) => dispatch(Actions.deleteTodo(id)),
   };
 };
 
-const CurrentTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList);
+const CurrentTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList);
 
 export default CurrentTodoList;
