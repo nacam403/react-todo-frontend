@@ -1,27 +1,27 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import * as Actions from '../actions';
 
-const TodoAdderImpl = ({ onAddClick }) => {
-  let textInput;
+type Props = {
+  onAddClick: (description: string) => void
+};
+
+const TodoAdderImpl = ({ onAddClick }: Props) => {
+  let textInput: ?HTMLInputElement;
 
   return (
     <form>
       <input type="text" ref={node => textInput = node}></input>
       <button type="button" onClick={() => {
-        onAddClick(textInput.value);
+        onAddClick(textInput ? textInput.value : '');
       }}>
         <FormattedMessage id="add" />
       </button>
     </form>
   );
-};
-
-TodoAdderImpl.propTypes = {
-  onAddClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = () => {
@@ -30,7 +30,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddClick: description => dispatch(Actions.addTodo(description))
+    onAddClick: (description: string) => dispatch(Actions.addTodo(description))
   };
 };
 

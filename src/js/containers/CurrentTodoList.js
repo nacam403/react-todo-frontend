@@ -1,7 +1,9 @@
+// @flow
 import { connect } from 'react-redux';
 
 import TodoList from '../components/TodoList';
 import * as Actions from '../actions';
+import type { Todo } from '../types';
 
 const mapStateToProps = state => {
   return {
@@ -11,10 +13,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClickDone: todo => dispatch(Actions.updateTodo(todo)),
-    onClickEdit: id => dispatch(Actions.startEditTodo(id)),
-    onClickSave: todo => dispatch(Actions.updateTodo(todo)),
-    onClickDelete: id => dispatch(Actions.deleteTodo(id))
+    onClickDone: (todo: Todo) => dispatch(Actions.updateTodo(todo)),
+    onClickEdit: (id: number) => dispatch(Actions.startEditTodo(id)),
+    onClickSave: (todo: Todo) => dispatch(Actions.updateTodo(todo)),
+    onClickDelete: (id: number) => dispatch(Actions.deleteTodo(id))
   };
 };
 
